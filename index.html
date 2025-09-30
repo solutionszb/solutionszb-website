@@ -8,568 +8,8 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <style>
-        :root {
-            --energetic-blue: #3B82F6;
-            --dark-foundation: #1E293B;
-            --clean-white: #FFFFFF;
-            --success-green: #22C55E;
-            --warning-orange: #F59E0B;
-            --gray-light: #F1F5F9;
-            --gray-medium: #64748B;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--dark-foundation);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        h1, h2, h3, h4 {
-            font-family: 'Space Grotesk', sans-serif;
-            line-height: 1.2;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Language Selector */
-        .lang-selector {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1000;
-            display: flex;
-            background: var(--clean-white);
-            border-radius: 50px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            overflow: hidden;
-        }
-        
-        .lang-btn {
-            padding: 10px 20px;
-            border: none;
-            background: transparent;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-        
-        .lang-btn.active {
-            background: var(--energetic-blue);
-            color: var(--clean-white);
-        }
-        
-        /* Header Navigation */
-        header {
-            padding: 30px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 999;
-            transition: all 0.3s ease;
-        }
-        
-        header.scrolled {
-            padding: 15px 0;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--dark-foundation);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-accent {
-            width: 8px;
-            height: 8px;
-            background: var(--energetic-blue);
-            border-radius: 2px;
-            animation: pulse 2s infinite;
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.2); opacity: 0.7; }
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            list-style: none;
-        }
-        
-        .nav-links a {
-            color: var(--dark-foundation);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-        
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--energetic-blue);
-            transition: width 0.3s ease;
-        }
-        
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        
-        /* Hero Section */
-        .hero {
-            padding: 180px 0 100px;
-            background: linear-gradient(135deg, var(--gray-light) 0%, var(--clean-white) 100%);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, var(--energetic-blue) 0%, transparent 70%);
-            opacity: 0.05;
-            animation: float 20s infinite ease-in-out;
-        }
-        
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-50px) rotate(180deg); }
-        }
-        
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: var(--dark-foundation);
-        }
-        
-        .hero-highlight {
-            color: var(--energetic-blue);
-            position: relative;
-        }
-        
-        .tagline {
-            font-size: 24px;
-            color: var(--gray-medium);
-            margin-bottom: 30px;
-            font-weight: 400;
-        }
-        
-        .hero-description {
-            font-size: 18px;
-            line-height: 1.8;
-            margin-bottom: 40px;
-            color: var(--dark-foundation);
-        }
-        
-        .cta-buttons {
-            display: flex;
-            gap: 20px;
-        }
-        
-        .btn {
-            padding: 15px 35px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn-primary {
-            background: var(--energetic-blue);
-            color: var(--clean-white);
-        }
-        
-        .btn-primary:hover {
-            background: #2563EB;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: var(--dark-foundation);
-            border: 2px solid var(--dark-foundation);
-        }
-        
-        .btn-secondary:hover {
-            background: var(--dark-foundation);
-            color: var(--clean-white);
-        }
-        
-        .hero-visual {
-            position: relative;
-            height: 400px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .automation-visual {
-            width: 100%;
-            height: 100%;
-            background: var(--dark-foundation);
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .automation-visual::before {
-            content: 'AI';
-            position: absolute;
-            font-size: 120px;
-            font-weight: 700;
-            color: var(--energetic-blue);
-            opacity: 0.1;
-            animation: slideIn 3s infinite alternate;
-        }
-        
-        @keyframes slideIn {
-            0% { transform: translateX(-20px); }
-            100% { transform: translateX(20px); }
-        }
-        
-        .flow-lines {
-            position: absolute;
-            width: 80%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--energetic-blue), transparent);
-            animation: flow 3s infinite linear;
-        }
-        
-        @keyframes flow {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        
-        /* Services Section */
-        .services {
-            padding: 100px 0;
-            background: var(--clean-white);
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-        
-        .section-header h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            color: var(--dark-foundation);
-        }
-        
-        .section-header p {
-            font-size: 18px;
-            color: var(--gray-medium);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-bottom: 60px;
-        }
-        
-        .service-card {
-            background: var(--gray-light);
-            padding: 40px;
-            border-radius: 16px;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--energetic-blue);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-        
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--energetic-blue);
-            border-radius: 12px;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--clean-white);
-        }
-        
-        .service-card h3 {
-            font-size: 24px;
-            margin-bottom: 15px;
-            color: var(--dark-foundation);
-        }
-        
-        .service-card p {
-            color: var(--gray-medium);
-            line-height: 1.8;
-        }
-        
-        /* Pricing Section */
-        .pricing {
-            padding: 100px 0;
-            background: linear-gradient(180deg, var(--gray-light) 0%, var(--clean-white) 100%);
-        }
-        
-        .pricing-cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 60px;
-        }
-        
-        .pricing-card {
-            background: var(--clean-white);
-            border-radius: 20px;
-            padding: 40px;
-            position: relative;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .pricing-card.featured {
-            border-color: var(--energetic-blue);
-            transform: scale(1.05);
-        }
-        
-        .pricing-card.featured .badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--energetic-blue);
-            color: var(--clean-white);
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-size: 14px;
-            font-weight: 600;
-        }
-        
-        .pricing-card:hover {
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            transform: translateY(-5px);
-        }
-        
-        .pricing-card.featured:hover {
-            transform: scale(1.05) translateY(-5px);
-        }
-        
-        .pricing-tier {
-            font-size: 20px;
-            color: var(--gray-medium);
-            margin-bottom: 10px;
-        }
-        
-        .pricing-name {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--dark-foundation);
-        }
-        
-        .pricing-amount {
-            font-size: 42px;
-            font-weight: 700;
-            color: var(--energetic-blue);
-            margin-bottom: 10px;
-        }
-        
-        .pricing-period {
-            color: var(--gray-medium);
-            margin-bottom: 30px;
-        }
-        
-        .pricing-features {
-            list-style: none;
-            margin-bottom: 30px;
-        }
-        
-        .pricing-features li {
-            padding: 12px 0;
-            border-bottom: 1px solid var(--gray-light);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .pricing-features li::before {
-            content: '✓';
-            color: var(--success-green);
-            font-weight: 700;
-        }
-        
-        /* Contact Section */
-        .contact {
-            padding: 100px 0;
-            background: var(--dark-foundation);
-            color: var(--clean-white);
-        }
-        
-        .contact-content {
-            text-align: center;
-        }
-        
-        .contact h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-        }
-        
-        .contact-description {
-            font-size: 18px;
-            margin-bottom: 40px;
-            opacity: 0.9;
-        }
-        
-        .notion-form-placeholder {
-            background: rgba(255,255,255,0.1);
-            border: 2px dashed rgba(255,255,255,0.3);
-            border-radius: 16px;
-            padding: 60px;
-            margin: 40px auto;
-            max-width: 600px;
-        }
-        
-        .notion-form-placeholder p {
-            font-size: 16px;
-            opacity: 0.8;
-        }
-        
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            background: var(--dark-foundation);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: var(--clean-white);
-        }
-        
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .footer-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .footer-links a {
-            color: var(--clean-white);
-            text-decoration: none;
-            opacity: 0.8;
-            transition: opacity 0.3s ease;
-        }
-        
-        .footer-links a:hover {
-            opacity: 1;
-        }
-        
-        /* Responsive */
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .services-grid,
-            .pricing-cards {
-                grid-template-columns: 1fr;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .tagline {
-                font-size: 20px;
-            }
-        }
-        
-        /* Language-specific content */
-        .lang-content {
-            display: none;
-        }
-        
-        .lang-content.active {
-            display: block;
-        }
-    </style>
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Language Selector -->
@@ -607,7 +47,7 @@
                             I'm a 26-year-old automation specialist who helps manufacturers streamline their operations using Gumloop - the most advanced automation platform most consultants haven't even heard of yet. My clients love working with someone who gets genuinely excited about solving their problems.
                         </p>
                         <div class="cta-buttons">
-                            <a href="#contact" class="btn btn-primary">Start Automating</a>
+                            <a href="#pricing" class="btn btn-primary">View Pricing</a>
                             <a href="#services" class="btn btn-secondary">Learn More</a>
                         </div>
                     </div>
@@ -620,7 +60,7 @@
                             Je suis un spécialiste de l'automatisation de 26 ans qui aide les manufacturiers à optimiser leurs opérations avec Gumloop - la plateforme d'automatisation la plus avancée que la plupart des consultants ne connaissent pas encore. Mes clients adorent travailler avec quelqu'un qui est véritablement passionné par la résolution de leurs problèmes.
                         </p>
                         <div class="cta-buttons">
-                            <a href="#contact" class="btn btn-primary">Commencer l'Automatisation</a>
+                            <a href="#pricing" class="btn btn-primary">Voir les Prix</a>
                             <a href="#services" class="btn btn-secondary">En Savoir Plus</a>
                         </div>
                     </div>
@@ -698,59 +138,47 @@
         </div>
     </section>
     
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
+    <!-- Pricing Paths Section -->
+    <section class="pricing-paths" id="pricing">
         <div class="container">
             <!-- English Content -->
             <div class="lang-content en active">
                 <div class="section-header">
-                    <h2>Investment in Growth</h2>
-                    <p>Focus on growing your business - I'll handle making your automation work perfectly</p>
+                    <h2>Choose Your Investment Path</h2>
+                    <p>Two powerful ways to transform your operations with AI automation</p>
                 </div>
                 
-                <div class="pricing-cards">
-                    <div class="pricing-card">
-                        <div class="pricing-tier">Tier 2</div>
-                        <div class="pricing-name">Automation Management</div>
-                        <div class="pricing-amount">$5-8K</div>
-                        <div class="pricing-period">per month</div>
-                        <ul class="pricing-features">
-                            <li>Monitoring & maintenance</li>
-                            <li>Basic troubleshooting</li>
-                            <li>Monthly performance reports</li>
-                            <li>Email/chat support (4-6hr)</li>
+                <div class="paths-grid">
+                    <div class="path-card retainer-path">
+                        <div class="path-icon">🔄</div>
+                        <h3>Ongoing Partnership</h3>
+                        <p class="path-subtitle">Monthly Retainer Model</p>
+                        <p class="path-description">
+                            Continuous optimization and growth with dedicated support. Perfect for companies ready to scale with AI as a core competitive advantage.
+                        </p>
+                        <ul class="path-benefits">
+                            <li>Predictable monthly investment</li>
+                            <li>Continuous improvements & updates</li>
+                            <li>Priority support & strategic guidance</li>
+                            <li>Scalable as your needs grow</li>
                         </ul>
-                        <a href="#contact" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+                        <a href="#retainer-pricing" class="btn btn-primary path-btn">Explore Retainer Options</a>
                     </div>
                     
-                    <div class="pricing-card featured">
-                        <div class="badge">MOST POPULAR</div>
-                        <div class="pricing-tier">Tier 1</div>
-                        <div class="pricing-name">Automation Partnership</div>
-                        <div class="pricing-amount">$8-15K</div>
-                        <div class="pricing-period">per month</div>
-                        <ul class="pricing-features">
-                            <li>Complete Gumloop infrastructure</li>
-                            <li>Monthly optimization & development</li>
-                            <li>Priority support (2hr response)</li>
-                            <li>Quarterly strategy sessions</li>
-                            <li>5X value delivery guarantee</li>
+                    <div class="path-card project-path">
+                        <div class="path-icon">🎯</div>
+                        <h3>Project-Based</h3>
+                        <p class="path-subtitle">One-Time Investment</p>
+                        <p class="path-description">
+                            Transformative implementations with clear deliverables. Ideal for specific automation challenges or initial system setup.
+                        </p>
+                        <ul class="path-benefits">
+                            <li>Fixed scope & timeline</li>
+                            <li>Clear deliverables & milestones</li>
+                            <li>Team training included</li>
+                            <li>Option to convert to retainer</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary" style="width: 100%;">Start Partnership</a>
-                    </div>
-                    
-                    <div class="pricing-card">
-                        <div class="pricing-tier">Project</div>
-                        <div class="pricing-name">Custom Setup</div>
-                        <div class="pricing-amount">$15-30K</div>
-                        <div class="pricing-period">one-time</div>
-                        <ul class="pricing-features">
-                            <li>Custom Gumloop development</li>
-                            <li>Team training & documentation</li>
-                            <li>90-day support included</li>
-                            <li>Optional conversion to retainer</li>
-                        </ul>
-                        <a href="#contact" class="btn btn-secondary" style="width: 100%;">Discuss Project</a>
+                        <a href="#project-pricing" class="btn btn-secondary path-btn">View Project Pricing</a>
                     </div>
                 </div>
             </div>
@@ -758,54 +186,345 @@
             <!-- French Content -->
             <div class="lang-content fr">
                 <div class="section-header">
-                    <h2>Investissement dans la Croissance</h2>
-                    <p>Concentrez-vous sur la croissance de votre entreprise - je m'occupe de faire fonctionner votre automatisation parfaitement</p>
+                    <h2>Choisissez Votre Voie d'Investissement</h2>
+                    <p>Deux façons puissantes de transformer vos opérations avec l'automatisation IA</p>
                 </div>
                 
-                <div class="pricing-cards">
-                    <div class="pricing-card">
-                        <div class="pricing-tier">Niveau 2</div>
-                        <div class="pricing-name">Gestion d'Automatisation</div>
-                        <div class="pricing-amount">5-8K$</div>
-                        <div class="pricing-period">par mois</div>
-                        <ul class="pricing-features">
-                            <li>Surveillance et maintenance</li>
-                            <li>Dépannage de base</li>
-                            <li>Rapports mensuels de performance</li>
-                            <li>Support email/chat (4-6h)</li>
+                <div class="paths-grid">
+                    <div class="path-card retainer-path">
+                        <div class="path-icon">🔄</div>
+                        <h3>Partenariat Continu</h3>
+                        <p class="path-subtitle">Modèle de Forfait Mensuel</p>
+                        <p class="path-description">
+                            Optimisation et croissance continues avec support dédié. Parfait pour les entreprises prêtes à évoluer avec l'IA comme avantage concurrentiel.
+                        </p>
+                        <ul class="path-benefits">
+                            <li>Investissement mensuel prévisible</li>
+                            <li>Améliorations continues</li>
+                            <li>Support prioritaire & conseils stratégiques</li>
+                            <li>Évolutif selon vos besoins</li>
                         </ul>
-                        <a href="#contact" class="btn btn-secondary" style="width: 100%;">Commencer</a>
+                        <a href="#retainer-pricing" class="btn btn-primary path-btn">Explorer les Forfaits</a>
                     </div>
                     
-                    <div class="pricing-card featured">
-                        <div class="badge">PLUS POPULAIRE</div>
-                        <div class="pricing-tier">Niveau 1</div>
-                        <div class="pricing-name">Partenariat d'Automatisation</div>
-                        <div class="pricing-amount">8-15K$</div>
-                        <div class="pricing-period">par mois</div>
-                        <ul class="pricing-features">
-                            <li>Infrastructure Gumloop complète</li>
-                            <li>Optimisation & développement mensuel</li>
-                            <li>Support prioritaire (réponse 2h)</li>
-                            <li>Sessions stratégiques trimestrielles</li>
-                            <li>Garantie de valeur 5X</li>
+                    <div class="path-card project-path">
+                        <div class="path-icon">🎯</div>
+                        <h3>Basé sur Projet</h3>
+                        <p class="path-subtitle">Investissement Unique</p>
+                        <p class="path-description">
+                            Implémentations transformatrices avec livrables clairs. Idéal pour des défis d'automatisation spécifiques.
+                        </p>
+                        <ul class="path-benefits">
+                            <li>Portée & échéancier fixes</li>
+                            <li>Livrables & jalons clairs</li>
+                            <li>Formation d'équipe incluse</li>
+                            <li>Option de conversion en forfait</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary" style="width: 100%;">Démarrer Partenariat</a>
+                        <a href="#project-pricing" class="btn btn-secondary path-btn">Voir Prix Projets</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Retainer Pricing Section -->
+    <section class="retainer-pricing" id="retainer-pricing">
+        <div class="container">
+            <!-- English Content -->
+            <div class="lang-content en active">
+                <div class="section-header">
+                    <h2>Monthly Retainer Framework</h2>
+                    <p>Transparent pricing based on complexity and value delivered</p>
+                </div>
+                
+                <div class="pricing-framework">
+                    <div class="framework-card tier-3">
+                        <div class="tier-header">
+                            <span class="tier-label">Tier 3</span>
+                            <h3>Foundation</h3>
+                        </div>
+                        <div class="price-range">$3-5K/month</div>
+                        <div class="complexity-score">Complexity: 1-3</div>
+                        <p class="tier-description">Essential automation for growing businesses</p>
+                        <ul class="tier-features">
+                            <li><strong>Basic Workflows:</strong> Simple linear automations</li>
+                            <li><strong>Standard Integrations:</strong> Common tools & platforms</li>
+                            <li><strong>Monitoring:</strong> Performance tracking & alerts</li>
+                            <li><strong>Support:</strong> 24-48hr response time</li>
+                            <li><strong>Updates:</strong> Monthly optimization</li>
+                        </ul>
                     </div>
                     
-                    <div class="pricing-card">
-                        <div class="pricing-tier">Projet</div>
-                        <div class="pricing-name">Configuration Personnalisée</div>
-                        <div class="pricing-amount">15-30K$</div>
-                        <div class="pricing-period">unique</div>
-                        <ul class="pricing-features">
-                            <li>Développement Gumloop personnalisé</li>
-                            <li>Formation d'équipe & documentation</li>
-                            <li>Support 90 jours inclus</li>
-                            <li>Conversion optionnelle en forfait</li>
+                    <div class="framework-card tier-2">
+                        <div class="tier-header">
+                            <span class="tier-label">Tier 2</span>
+                            <h3>Growth</h3>
+                        </div>
+                        <div class="price-range">$5-8K/month</div>
+                        <div class="complexity-score">Complexity: 4-6</div>
+                        <p class="tier-description">Advanced automation for scaling operations</p>
+                        <ul class="tier-features">
+                            <li><strong>Complex Workflows:</strong> Multi-branch logic & conditions</li>
+                            <li><strong>AI Integration:</strong> GPT-4 & Claude implementations</li>
+                            <li><strong>Custom Development:</strong> Tailored solutions</li>
+                            <li><strong>Priority Support:</strong> 4-6hr response time</li>
+                            <li><strong>Bi-weekly Updates:</strong> Continuous improvements</li>
                         </ul>
-                        <a href="#contact" class="btn btn-secondary" style="width: 100%;">Discuter Projet</a>
                     </div>
+                    
+                    <div class="framework-card tier-1 featured">
+                        <div class="tier-badge">RECOMMENDED</div>
+                        <div class="tier-header">
+                            <span class="tier-label">Tier 1</span>
+                            <h3>Enterprise</h3>
+                        </div>
+                        <div class="price-range">$8-15K/month</div>
+                        <div class="complexity-score">Complexity: 7-10</div>
+                        <p class="tier-description">Full-scale transformation & optimization</p>
+                        <ul class="tier-features">
+                            <li><strong>Enterprise Workflows:</strong> Mission-critical automations</li>
+                            <li><strong>Advanced AI:</strong> Custom models & training</li>
+                            <li><strong>Strategic Partnership:</strong> Quarterly planning sessions</li>
+                            <li><strong>Immediate Support:</strong> 2hr response time</li>
+                            <li><strong>Weekly Updates:</strong> Proactive optimization</li>
+                            <li><strong>ROI Guarantee:</strong> 5X value delivery</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- French Content -->
+            <div class="lang-content fr">
+                <div class="section-header">
+                    <h2>Cadre de Forfait Mensuel</h2>
+                    <p>Prix transparent basé sur la complexité et la valeur livrée</p>
+                </div>
+                
+                <div class="pricing-framework">
+                    <div class="framework-card tier-3">
+                        <div class="tier-header">
+                            <span class="tier-label">Niveau 3</span>
+                            <h3>Fondation</h3>
+                        </div>
+                        <div class="price-range">3-5K$/mois</div>
+                        <div class="complexity-score">Complexité: 1-3</div>
+                        <p class="tier-description">Automatisation essentielle pour entreprises en croissance</p>
+                        <ul class="tier-features">
+                            <li><strong>Flux de base:</strong> Automatisations linéaires simples</li>
+                            <li><strong>Intégrations standards:</strong> Outils communs</li>
+                            <li><strong>Surveillance:</strong> Suivi de performance</li>
+                            <li><strong>Support:</strong> Réponse 24-48h</li>
+                            <li><strong>Mises à jour:</strong> Optimisation mensuelle</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="framework-card tier-2">
+                        <div class="tier-header">
+                            <span class="tier-label">Niveau 2</span>
+                            <h3>Croissance</h3>
+                        </div>
+                        <div class="price-range">5-8K$/mois</div>
+                        <div class="complexity-score">Complexité: 4-6</div>
+                        <p class="tier-description">Automatisation avancée pour opérations en expansion</p>
+                        <ul class="tier-features">
+                            <li><strong>Flux complexes:</strong> Logique multi-branches</li>
+                            <li><strong>Intégration IA:</strong> GPT-4 & Claude</li>
+                            <li><strong>Développement personnalisé:</strong> Solutions sur mesure</li>
+                            <li><strong>Support prioritaire:</strong> Réponse 4-6h</li>
+                            <li><strong>Mises à jour bi-hebdomadaires:</strong> Améliorations continues</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="framework-card tier-1 featured">
+                        <div class="tier-badge">RECOMMANDÉ</div>
+                        <div class="tier-header">
+                            <span class="tier-label">Niveau 1</span>
+                            <h3>Entreprise</h3>
+                        </div>
+                        <div class="price-range">8-15K$/mois</div>
+                        <div class="complexity-score">Complexité: 7-10</div>
+                        <p class="tier-description">Transformation & optimisation complète</p>
+                        <ul class="tier-features">
+                            <li><strong>Flux entreprise:</strong> Automatisations critiques</li>
+                            <li><strong>IA avancée:</strong> Modèles personnalisés</li>
+                            <li><strong>Partenariat stratégique:</strong> Sessions trimestrielles</li>
+                            <li><strong>Support immédiat:</strong> Réponse 2h</li>
+                            <li><strong>Mises à jour hebdomadaires:</strong> Optimisation proactive</li>
+                            <li><strong>Garantie ROI:</strong> Valeur 5X livrée</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Project Pricing Section -->
+    <section class="project-pricing" id="project-pricing">
+        <div class="container">
+            <!-- English Content -->
+            <div class="lang-content en active">
+                <div class="section-header">
+                    <h2>Project-Based Pricing</h2>
+                    <p>One-time investments for transformative implementations</p>
+                </div>
+                
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>Starter Implementation</h3>
+                        <div class="project-price">$10-20K</div>
+                        <p>Perfect for initial automation setup</p>
+                        <ul class="project-features">
+                            <li>3-5 core workflows</li>
+                            <li>Basic integrations</li>
+                            <li>Team training (1 week)</li>
+                            <li>30-day support</li>
+                            <li>Documentation package</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card featured">
+                        <div class="project-badge">MOST POPULAR</div>
+                        <h3>Full System Build</h3>
+                        <div class="project-price">$20-40K</div>
+                        <p>Comprehensive automation infrastructure</p>
+                        <ul class="project-features">
+                            <li>10-15 complex workflows</li>
+                            <li>AI model integration</li>
+                            <li>Custom dashboard</li>
+                            <li>Team training (2 weeks)</li>
+                            <li>90-day support</li>
+                            <li>Quarterly check-ins</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Enterprise Transform</h3>
+                        <div class="project-price">$40-80K</div>
+                        <p>Complete digital transformation</p>
+                        <ul class="project-features">
+                            <li>Unlimited workflows</li>
+                            <li>Custom AI solutions</li>
+                            <li>Full system integration</li>
+                            <li>Team certification program</li>
+                            <li>6-month support</li>
+                            <li>Performance optimization</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="project-note">
+                    <p><strong>Note:</strong> All projects include the option to convert to a monthly retainer at a 20% discount for the first 3 months.</p>
+                </div>
+            </div>
+            
+            <!-- French Content -->
+            <div class="lang-content fr">
+                <div class="section-header">
+                    <h2>Prix Basés sur Projet</h2>
+                    <p>Investissements uniques pour implémentations transformatrices</p>
+                </div>
+                
+                <div class="project-grid">
+                    <div class="project-card">
+                        <h3>Implémentation Initiale</h3>
+                        <div class="project-price">10-20K$</div>
+                        <p>Parfait pour configuration initiale</p>
+                        <ul class="project-features">
+                            <li>3-5 flux principaux</li>
+                            <li>Intégrations de base</li>
+                            <li>Formation d'équipe (1 semaine)</li>
+                            <li>Support 30 jours</li>
+                            <li>Documentation complète</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card featured">
+                        <div class="project-badge">PLUS POPULAIRE</div>
+                        <h3>Construction Complète</h3>
+                        <div class="project-price">20-40K$</div>
+                        <p>Infrastructure d'automatisation complète</p>
+                        <ul class="project-features">
+                            <li>10-15 flux complexes</li>
+                            <li>Intégration modèles IA</li>
+                            <li>Tableau de bord personnalisé</li>
+                            <li>Formation d'équipe (2 semaines)</li>
+                            <li>Support 90 jours</li>
+                            <li>Révisions trimestrielles</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3>Transformation Entreprise</h3>
+                        <div class="project-price">40-80K$</div>
+                        <p>Transformation numérique complète</p>
+                        <ul class="project-features">
+                            <li>Flux illimités</li>
+                            <li>Solutions IA personnalisées</li>
+                            <li>Intégration système complète</li>
+                            <li>Programme de certification</li>
+                            <li>Support 6 mois</li>
+                            <li>Optimisation performance</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="project-note">
+                    <p><strong>Note:</strong> Tous les projets incluent l'option de convertir en forfait mensuel avec 20% de rabais pour les 3 premiers mois.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Pricing Calculator Section -->
+    <section class="pricing-calculator">
+        <div class="container">
+            <!-- English Content -->
+            <div class="lang-content en active">
+                <div class="section-header">
+                    <h2>Calculate Your Investment</h2>
+                    <p>Get an instant estimate based on your automation needs</p>
+                </div>
+                
+                <div class="calculator-placeholder">
+                    <div class="calculator-icon">🧮</div>
+                    <h3>Interactive Pricing Calculator</h3>
+                    <p>Coming Soon</p>
+                    <div class="calculator-features">
+                        <p>This interactive tool will help you:</p>
+                        <ul>
+                            <li>• Assess your automation complexity score</li>
+                            <li>• Calculate potential ROI</li>
+                            <li>• Get personalized pricing recommendations</li>
+                            <li>• Compare retainer vs project options</li>
+                            <li>• Estimate implementation timeline</li>
+                        </ul>
+                    </div>
+                    <p class="calculator-cta">In the meantime, <a href="#contact">contact us</a> for a personalized quote.</p>
+                </div>
+            </div>
+            
+            <!-- French Content -->
+            <div class="lang-content fr">
+                <div class="section-header">
+                    <h2>Calculez Votre Investissement</h2>
+                    <p>Obtenez une estimation instantanée selon vos besoins</p>
+                </div>
+                
+                <div class="calculator-placeholder">
+                    <div class="calculator-icon">🧮</div>
+                    <h3>Calculateur de Prix Interactif</h3>
+                    <p>Bientôt Disponible</p>
+                    <div class="calculator-features">
+                        <p>Cet outil interactif vous aidera à:</p>
+                        <ul>
+                            <li>• Évaluer votre score de complexité</li>
+                            <li>• Calculer le ROI potentiel</li>
+                            <li>• Obtenir des recommandations personnalisées</li>
+                            <li>• Comparer forfait vs projet</li>
+                            <li>• Estimer le calendrier d'implémentation</li>
+                        </ul>
+                    </div>
+                    <p class="calculator-cta">En attendant, <a href="#contact">contactez-nous</a> pour un devis personnalisé.</p>
                 </div>
             </div>
         </div>
@@ -817,25 +536,26 @@
             <!-- English Content -->
             <div class="lang-content en active">
                 <div class="contact-content">
-                    <h2>Let's Get Excited About Your Automation</h2>
+                    <h2>Ready to Transform Your Operations?</h2>
                     <p class="contact-description">
-                        Ready to implement AI-native solutions at startup speed? Let's discuss how Gumloop can transform your manufacturing operations.
+                        Let's discuss how Gumloop-powered automation can accelerate your growth.
                     </p>
                     
                     <div class="notion-form-placeholder">
-                        <p>📝 Notion Form Integration</p>
-                        <p style="margin-top: 20px;">Your Notion form will be embedded here. Configure it to capture:</p>
+                        <p>📝 Get Started Form</p>
+                        <p style="margin-top: 20px;">Tell us about your automation needs:</p>
                         <ul style="text-align: left; margin-top: 20px;">
-                            <li>• Company name & contact details</li>
-                            <li>• Current automation challenges</li>
-                            <li>• Monthly automation budget</li>
-                            <li>• Preferred service tier</li>
-                            <li>• Timeline for implementation</li>
+                            <li>• Company name & industry</li>
+                            <li>• Current operational challenges</li>
+                            <li>• Preferred engagement model (retainer/project)</li>
+                            <li>• Expected complexity level (1-10)</li>
+                            <li>• Timeline & budget range</li>
+                            <li>• Key automation goals</li>
                         </ul>
                     </div>
                     
                     <p style="margin-top: 40px; opacity: 0.8;">
-                        Or reach out directly: <strong>hi@solutionszb.com</strong>
+                        Direct inquiries: <strong>hi@solutionszb.com</strong>
                     </p>
                 </div>
             </div>
@@ -843,25 +563,26 @@
             <!-- French Content -->
             <div class="lang-content fr">
                 <div class="contact-content">
-                    <h2>Parlons de Votre Automatisation avec Enthousiasme</h2>
+                    <h2>Prêt à Transformer Vos Opérations?</h2>
                     <p class="contact-description">
-                        Prêt à implémenter des solutions IA natives à la vitesse d'une startup? Discutons comment Gumloop peut transformer vos opérations manufacturières.
+                        Discutons comment l'automatisation Gumloop peut accélérer votre croissance.
                     </p>
                     
                     <div class="notion-form-placeholder">
-                        <p>📝 Intégration Formulaire Notion</p>
-                        <p style="margin-top: 20px;">Votre formulaire Notion sera intégré ici. Configurez-le pour capturer:</p>
+                        <p>📝 Formulaire de Démarrage</p>
+                        <p style="margin-top: 20px;">Parlez-nous de vos besoins:</p>
                         <ul style="text-align: left; margin-top: 20px;">
-                            <li>• Nom d'entreprise & coordonnées</li>
-                            <li>• Défis d'automatisation actuels</li>
-                            <li>• Budget mensuel d'automatisation</li>
-                            <li>• Niveau de service préféré</li>
-                            <li>• Échéancier d'implémentation</li>
+                            <li>• Nom d'entreprise & industrie</li>
+                            <li>• Défis opérationnels actuels</li>
+                            <li>• Modèle préféré (forfait/projet)</li>
+                            <li>• Niveau de complexité attendu (1-10)</li>
+                            <li>• Échéancier & budget</li>
+                            <li>• Objectifs d'automatisation clés</li>
                         </ul>
                     </div>
                     
                     <p style="margin-top: 40px; opacity: 0.8;">
-                        Ou contactez directement: <strong>hi@solutionszb.com</strong>
+                        Demandes directes: <strong>hi@solutionszb.com</strong>
                     </p>
                 </div>
             </div>
@@ -884,89 +605,6 @@
         </div>
     </footer>
     
-    <script>
-        // Language Switcher
-        function switchLang(lang) {
-            // Update button states
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Update content visibility
-            document.querySelectorAll('.lang-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            document.querySelectorAll('.lang-content.' + lang).forEach(content => {
-                content.classList.add('active');
-            });
-            
-            // Update navigation labels
-            if (lang === 'fr') {
-                document.querySelector('.nav-service').textContent = 'Services';
-                document.querySelector('.nav-gumloop').textContent = 'Gumloop';
-                document.querySelector('.nav-pricing').textContent = 'Tarifs';
-                document.querySelector('.nav-contact').textContent = 'Contact';
-                document.querySelector('.footer-privacy').textContent = 'Confidentialité';
-                document.querySelector('.footer-terms').textContent = 'Conditions';
-                document.documentElement.lang = 'fr';
-            } else {
-                document.querySelector('.nav-service').textContent = 'Services';
-                document.querySelector('.nav-gumloop').textContent = 'Gumloop';
-                document.querySelector('.nav-pricing').textContent = 'Pricing';
-                document.querySelector('.nav-contact').textContent = 'Contact';
-                document.querySelector('.footer-privacy').textContent = 'Privacy';
-                document.querySelector('.footer-terms').textContent = 'Terms';
-                document.documentElement.lang = 'en';
-            }
-        }
-        
-        // Header scroll effect
-        window.addEventListener('scroll', function() {
-            const header = document.getElementById('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
-        
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-        
-        // Add animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-        
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-        
-        // Observe all service and pricing cards
-        document.querySelectorAll('.service-card, .pricing-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
