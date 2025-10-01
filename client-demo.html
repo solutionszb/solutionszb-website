@@ -580,13 +580,42 @@
             updateDisplay();
         }
 
-        // Override the switchLang function for this page
-        const originalSwitchLang = window.switchLang;
+        // Override the switchLang function for this page immediately
         window.switchLang = function(lang) {
-            if (originalSwitchLang) {
-                originalSwitchLang(lang);
+            // Update button states
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Find the clicked button and make it active
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.textContent.toLowerCase() === lang ||
+                    (btn.textContent === 'EN' && lang === 'en') ||
+                    (btn.textContent === 'FR' && lang === 'fr')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update navigation labels
+            if (lang === 'fr') {
+                document.querySelector('.nav-service').textContent = 'Services';
+                document.querySelector('.nav-gumloop').textContent = 'Gumloop';
+                document.querySelector('.nav-pricing').textContent = 'Tarifs';
+                document.querySelector('.nav-contact').textContent = 'Contact';
+                document.documentElement.lang = 'fr';
+            } else {
+                document.querySelector('.nav-service').textContent = 'Services';
+                document.querySelector('.nav-gumloop').textContent = 'Gumloop';
+                document.querySelector('.nav-pricing').textContent = 'Pricing';
+                document.querySelector('.nav-contact').textContent = 'Contact';
+                document.documentElement.lang = 'en';
             }
+
+            // Update calculator language
             updateCalculatorLanguage(lang);
+
+            // Save language preference
+            localStorage.setItem('preferredLanguage', lang);
         };
 
         function calculateROI() {
