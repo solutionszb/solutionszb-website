@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ROI Calculator - SolutionsZB</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .calculator-section {
+            padding: 140px 0 80px;
+            min-height: calc(100vh - 140px);
+        }
+
+        .calculator-widget {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            background: #FFFFFF;
+            border-radius: 20px;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            overflow: hidden;
+        }
+
+        .calc-header {
+            background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .calc-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .calc-header p {
+            font-size: 18px;
+            opacity: 0.95;
+        }
+
+        .calculator-body {
+            padding: 60px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .calculator-inputs {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .calculator-results {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .section-title {
+            color: #1E293B;
+            font-size: 24px;
+            margin-bottom: 25px;
+            font-weight: 700;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .input-group {
+            margin-bottom: 0;
+        }
+
+        .input-group label {
+            display: block;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .input-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: #E5E7EB;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .input-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+            transition: all 0.2s;
+        }
+
+        .input-group input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+        }
+
+        .input-group input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            cursor: pointer;
+            border: none;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+            transition: all 0.2s;
+        }
+
+        .input-group input[type="number"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-group input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .input-group select {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .value-display {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .help-text {
+            display: block;
+            margin-top: 6px;
+            color: #94A3B8;
+            font-size: 14px;
+        }
+
+        .current-state {
+            background: linear-gradient(135deg, #FEF2F2, #FEE2E2);
+            border-left: 4px solid #EF4444;
+            padding: 30px;
+            border-radius: 16px;
+        }
+
+        .current-state h4 {
+            color: #991B1B;
+            font-size: 20px;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .metric:last-child {
+            margin-bottom: 0;
+        }
+
+        .metric .label {
+            color: #64748B;
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .metric .value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .metric .value.negative {
+            color: #EF4444;
+        }
+
+        .metric .value.positive {
+            color: #22C55E;
+        }
+
+        .recommendation {
+            background: linear-gradient(135deg, #22C55E 0%, #16A34A 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .recommendation h3 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .investment-details {
+            margin-bottom: 25px;
+        }
+
+        .investment-details p {
+            margin-bottom: 12px;
+            font-size: 17px;
+            opacity: 0.95;
+        }
+
+        .investment-details strong {
+            font-size: 24px;
+            display: block;
+            margin-top: 5px;
+        }
+
+        .roi-indicator {
+            margin-top: 25px;
+        }
+
+        .roi-meter {
+            background: rgba(255, 255, 255, 0.3);
+            height: 50px;
+            border-radius: 25px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .roi-fill {
+            height: 100%;
+            background: white;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            border-radius: 25px;
+        }
+
+        .roi-value {
+            color: #16A34A;
+            font-weight: 700;
+            font-size: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (max-width: 1024px) {
+            .calculator-body {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 40px;
+            }
+
+            .calculator-results {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .calculator-section {
+                padding: 120px 20px 40px;
+            }
+
+            .calculator-body {
+                padding: 30px 20px;
+                gap: 30px;
+            }
+
+            .calc-header {
+                padding: 40px 20px;
+            }
+
+            .calc-header h1 {
+                font-size: 28px;
+            }
+
+            .calc-header p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .current-state,
+            .recommendation {
+                padding: 25px;
+            }
+
+            .recommendation h3 {
+                font-size: 22px;
+            }
+
+            .metric {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Selector -->
+    <div class="lang-selector">
+        <button class="lang-btn active" onclick="switchLang('en')">EN</button>
+        <button class="lang-btn" onclick="switchLang('fr')">FR</button>
+    </div>
+
+    <!-- Header -->
+    <header id="header">
+        <nav class="container">
+            <a href="index.html#header" class="logo">
+                SolutionsZB
+                <span class="logo-accent"></span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html#services" class="nav-service">Services</a></li>
+                <li><a href="index.html#gumloop" class="nav-gumloop">Gumloop</a></li>
+                <li><a href="calculator.html" class="nav-calculator">Calculator</a></li>
+                <li><a href="index.html#pricing" class="nav-pricing">Pricing</a></li>
+                <li><a href="index.html#contact" class="nav-contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Calculator Section -->
+    <section class="calculator-section">
+        <div class="calculator-widget">
+            <div class="calc-header">
+                <h1>🍬 ROI Calculator</h1>
+                <p>Discover Your Automation Savings Potential</p>
+            </div>
+
+            <div class="calculator-body">
+                <div class="calculator-inputs">
+                    <h3 class="section-title">Your Current Situation</h3>
+
+                    <div class="input-group">
+                        <label>Employees doing repetitive tasks</label>
+                        <input type="range" min="1" max="50" value="4" id="employees">
+                        <span class="value-display" id="employeesDisplay">4 employees</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Average hourly rate (CAD)</label>
+                        <input type="number" min="20" max="100" value="25" id="hourlyRate">
+                        <span class="help-text">Include benefits & overhead</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Hours per month on repetitive tasks</label>
+                        <input type="range" min="5" max="150" value="75" id="hoursPerEmployee">
+                        <span class="value-display" id="hoursDisplay">75 hours/month</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Estimated automations needed</label>
+                        <input type="range" min="1" max="25" value="4" id="automationCount">
+                        <span class="value-display" id="automationsDisplay">4 automations</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Process complexity</label>
+                        <select id="complexity">
+                            <option value="simple">Simple (basic data movement)</option>
+                            <option value="moderate" selected>Moderate (multi-step workflows)</option>
+                            <option value="complex">Complex (logic & integrations)</option>
+                            <option value="enterprise">Enterprise (full orchestration)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Monthly cost of errors/rework (optional)</label>
+                        <input type="number" min="0" max="10000" value="500" id="errorCosts">
+                    </div>
+                </div>
+
+                <div class="calculator-results">
+                    <div class="current-state">
+                        <h4>Your Current Costs</h4>
+                        <div class="metric">
+                            <span class="label">Monthly labor cost:</span>
+                            <span class="value negative" id="laborCost">$7,500</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Annual waste:</span>
+                            <span class="value negative" id="annualWaste">$90,000</span>
+                        </div>
+                        <div class="metric">
+                            <span class="label">Error costs:</span>
+                            <span class="value negative" id="errorCostDisplay">$500/month</span>
+                        </div>
+                    </div>
+
+                    <div class="recommendation" id="recommendation">
+                        <h3 id="tierName">Recommended: Bubblegum Foundation</h3>
+                        <div class="investment-details">
+                            <p>Monthly Investment:</p>
+                            <strong id="investment">$3,200</strong>
+                            <p style="margin-top: 20px;">Immediate Monthly Savings:</p>
+                            <strong id="savings">$4,800</strong>
+                            <p style="margin-top: 20px;">Annual Net Benefit:</p>
+                            <strong id="annualBenefit">$57,600</strong>
+                        </div>
+                        <div class="roi-indicator">
+                            <div class="roi-meter">
+                                <div class="roi-fill" id="roiFill" style="width: 100%">
+                                    <span class="roi-value" id="roiValue">150% ROI</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script>
+        function calculateROI() {
+            const employees = parseInt(document.getElementById('employees').value);
+            const hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
+            const hoursPerEmployee = parseInt(document.getElementById('hoursPerEmployee').value);
+            const automationCount = parseInt(document.getElementById('automationCount').value);
+            const complexity = document.getElementById('complexity').value;
+            const errorCosts = parseFloat(document.getElementById('errorCosts').value) || 0;
+
+            const monthlyLaborCost = employees * hoursPerEmployee * hourlyRate;
+            const totalCurrentCost = monthlyLaborCost + errorCosts;
+
+            const complexityMultipliers = {
+                'simple': 750,
+                'moderate': 1000,
+                'complex': 1500,
+                'enterprise': 2000
+            };
+
+            const perAutomationCost = complexityMultipliers[complexity];
+
+            let recommendedTier, monthlyInvestment;
+
+            if (automationCount <= 2) {
+                recommendedTier = 'Lollipop Taste Test';
+                monthlyInvestment = 1200;
+            } else if (automationCount <= 8) {
+                recommendedTier = 'Bubblegum Foundation';
+                monthlyInvestment = Math.min(8050, 2070 + (automationCount - 1) * 800);
+            } else {
+                recommendedTier = 'Jawbreaker Partnership';
+                if (automationCount <= 12) {
+                    monthlyInvestment = 4000 + (automationCount - 4) * 400;
+                } else if (automationCount <= 20) {
+                    monthlyInvestment = 7250 + (automationCount - 12) * 375;
+                } else {
+                    monthlyInvestment = 10250 + (automationCount - 20) * 250;
+                }
+            }
+
+            const monthlySavings = totalCurrentCost - monthlyInvestment;
+            const annualSavings = monthlySavings * 12;
+            const roiPercentage = monthlySavings > 0 ? (monthlySavings / monthlyInvestment) * 100 : 0;
+
+            return {
+                currentCost: totalCurrentCost,
+                laborCost: monthlyLaborCost,
+                investment: monthlyInvestment,
+                savings: monthlySavings,
+                annualSavings: annualSavings,
+                roi: roiPercentage,
+                tier: recommendedTier
+            };
+        }
+
+        function formatCurrency(value) {
+            return '$' + Math.round(value).toLocaleString();
+        }
+
+        function updateDisplay() {
+            const results = calculateROI();
+
+            document.getElementById('laborCost').textContent = formatCurrency(results.laborCost);
+            document.getElementById('annualWaste').textContent = formatCurrency(results.currentCost * 12);
+            document.getElementById('errorCostDisplay').textContent = formatCurrency(parseFloat(document.getElementById('errorCosts').value) || 0) + '/month';
+
+            document.getElementById('tierName').textContent = 'Recommended: ' + results.tier;
+            document.getElementById('investment').textContent = formatCurrency(results.investment);
+            document.getElementById('savings').textContent = formatCurrency(results.savings);
+            document.getElementById('annualBenefit').textContent = formatCurrency(results.annualSavings);
+            document.getElementById('roiValue').textContent = Math.round(results.roi) + '% ROI';
+
+            const roiFillWidth = Math.min(100, Math.max(20, results.roi / 5));
+            document.getElementById('roiFill').style.width = roiFillWidth + '%';
+        }
+
+        document.getElementById('employees').addEventListener('input', function(e) {
+            document.getElementById('employeesDisplay').textContent = e.target.value + ' employees';
+            updateDisplay();
+        });
+
+        document.getElementById('hoursPerEmployee').addEventListener('input', function(e) {
+            document.getElementById('hoursDisplay').textContent = e.target.value + ' hours/month';
+            updateDisplay();
+        });
+
+        document.getElementById('automationCount').addEventListener('input', function(e) {
+            document.getElementById('automationsDisplay').textContent = e.target.value + ' automations';
+            updateDisplay();
+        });
+
+        document.getElementById('hourlyRate').addEventListener('input', updateDisplay);
+        document.getElementById('complexity').addEventListener('change', updateDisplay);
+        document.getElementById('errorCosts').addEventListener('input', updateDisplay);
+
+        updateDisplay();
+    </script>
+</body>
+</html>
