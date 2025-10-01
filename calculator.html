@@ -440,6 +440,135 @@
 
     <script src="script.js"></script>
     <script>
+        // Translation data
+        const translations = {
+            en: {
+                title: "ROI Calculator - SolutionsZB",
+                header: "💰 Calculate Your Savings",
+                subheader: "See how much you could save with automation in 60 seconds",
+                socialProof: "Join <strong>47 companies</strong> saving <strong>$850,000/month</strong> with our automations",
+                employeesLabel: "How many employees do repetitive tasks?",
+                employeesUnit: "employees",
+                hoursLabel: "Hours per month spent on repetitive work",
+                hoursUnit: "hours/month",
+                automationsLabel: "How many processes could be automated?",
+                automationsUnit: "automations",
+                complexityLabel: "Process complexity level",
+                complexitySimple: "Simple tasks",
+                complexityModerate: "Moderate workflows",
+                complexityComplex: "Complex processes",
+                complexityEnterprise: "Enterprise-level",
+                testimonialDefault: '"SolutionsZB handles 8 workflows, we focus on growth."',
+                testimonialAuthorDefault: "— Bubblegum Foundation Client",
+                testimonialJawbreaker: '"SolutionsZB transformed our entire operation with 15+ automations."',
+                testimonialAuthorJawbreaker: "— Jawbreaker Partnership Client",
+                testimonialLollipop: '"Perfect way to test automation before scaling up."',
+                testimonialAuthorLollipop: "— Lollipop Taste Test Client",
+                resultsTitle: "💡 Your Potential Savings",
+                monthlySavings: "Monthly Savings:",
+                annualBenefit: "Annual Benefit:",
+                roi: "ROI:",
+                ctaSave: "You could save {amount}/month with {tier}!",
+                ctaStart: "Start saving with {tier}",
+                ctaButton: "Get Your Free Consultation",
+                navCalculator: "Calculator"
+            },
+            fr: {
+                title: "Calculateur de ROI - SolutionsZB",
+                header: "💰 Calculez vos économies",
+                subheader: "Découvrez combien vous pourriez économiser avec l'automatisation en 60 secondes",
+                socialProof: "Rejoignez <strong>47 entreprises</strong> économisant <strong>850 000$/mois</strong> avec nos automatisations",
+                employeesLabel: "Combien d'employés effectuent des tâches répétitives?",
+                employeesUnit: "employés",
+                hoursLabel: "Heures par mois consacrées au travail répétitif",
+                hoursUnit: "heures/mois",
+                automationsLabel: "Combien de processus pourraient être automatisés?",
+                automationsUnit: "automatisations",
+                complexityLabel: "Niveau de complexité des processus",
+                complexitySimple: "Tâches simples",
+                complexityModerate: "Flux de travail modérés",
+                complexityComplex: "Processus complexes",
+                complexityEnterprise: "Niveau entreprise",
+                testimonialDefault: '"SolutionsZB gère 8 flux de travail, nous nous concentrons sur la croissance."',
+                testimonialAuthorDefault: "— Client Bubblegum Foundation",
+                testimonialJawbreaker: '"SolutionsZB a transformé toute notre opération avec plus de 15 automatisations."',
+                testimonialAuthorJawbreaker: "— Client Jawbreaker Partnership",
+                testimonialLollipop: '"Parfait pour tester l\'automatisation avant de passer à l\'échelle."',
+                testimonialAuthorLollipop: "— Client Lollipop Taste Test",
+                resultsTitle: "💡 Vos économies potentielles",
+                monthlySavings: "Économies mensuelles:",
+                annualBenefit: "Bénéfice annuel:",
+                roi: "ROI:",
+                ctaSave: "Vous pourriez économiser {amount}/mois avec {tier}!",
+                ctaStart: "Commencez à économiser avec {tier}",
+                ctaButton: "Obtenez votre consultation gratuite",
+                navCalculator: "Calculateur"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function updateCalculatorLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Update page title
+            document.title = t.title;
+
+            // Update header
+            document.querySelector('.calc-header h2').textContent = t.header;
+            document.querySelector('.calc-header p').textContent = t.subheader;
+            document.querySelector('.social-proof p').innerHTML = t.socialProof;
+
+            // Update input labels
+            document.querySelector('label[for="employees"]').textContent = t.employeesLabel;
+            document.querySelector('label[for="hours"]').textContent = t.hoursLabel;
+            document.querySelector('label[for="automations"]').textContent = t.automationsLabel;
+            document.querySelector('label[for="complexity"]').textContent = t.complexityLabel;
+
+            // Update complexity options
+            const complexitySelect = document.getElementById('complexity');
+            complexitySelect.options[0].textContent = t.complexitySimple;
+            complexitySelect.options[1].textContent = t.complexityModerate;
+            complexitySelect.options[2].textContent = t.complexityComplex;
+            complexitySelect.options[3].textContent = t.complexityEnterprise;
+
+            // Update results section
+            document.querySelector('.results-preview h4').textContent = t.resultsTitle;
+            document.querySelectorAll('.preview-metric .label')[0].textContent = t.monthlySavings;
+            document.querySelectorAll('.preview-metric .label')[1].textContent = t.annualBenefit;
+            document.querySelectorAll('.preview-metric .label')[2].textContent = t.roi;
+
+            // Update CTA button
+            document.getElementById('ctaButton').textContent = t.ctaButton;
+
+            // Update navigation
+            if (document.querySelector('.nav-calculator')) {
+                document.querySelector('.nav-calculator').textContent = t.navCalculator;
+            }
+
+            // Update displays with current values
+            const employees = document.getElementById('employees').value;
+            const hours = document.getElementById('hours').value;
+            const automations = document.getElementById('automations').value;
+
+            document.getElementById('employeesDisplay').textContent = `${employees} ${t.employeesUnit}`;
+            document.getElementById('hoursDisplay').textContent = `${hours} ${t.hoursUnit}`;
+            document.getElementById('automationsDisplay').textContent = `${automations} ${t.automationsUnit}`;
+
+            // Refresh the display
+            updateDisplay();
+        }
+
+        // Override the switchLang function for this page
+        const originalSwitchLang = window.switchLang;
+        window.switchLang = function(lang) {
+            if (originalSwitchLang) {
+                originalSwitchLang(lang);
+            }
+            updateCalculatorLanguage(lang);
+        };
+
         function calculateROI() {
             const employees = parseInt(document.getElementById('employees').value);
             const hours = parseInt(document.getElementById('hours').value);
@@ -494,6 +623,7 @@
 
         function updateDisplay() {
             const results = calculateROI();
+            const t = translations[currentLang];
 
             document.getElementById('previewSavings').textContent = formatCurrency(results.savings);
             document.getElementById('previewAnnual').textContent = formatCurrency(results.annual);
@@ -504,15 +634,15 @@
             const ctaButton = document.getElementById('ctaButton');
 
             if (results.savings > 10000) {
-                ctaMessage.textContent = `You could save ${formatCurrency(results.savings)}/month with ${results.tier}!`;
+                ctaMessage.textContent = t.ctaSave.replace('{amount}', formatCurrency(results.savings)).replace('{tier}', results.tier);
                 ctaMessage.className = 'cta-message high-urgency';
                 ctaButton.className = 'cta-button high-urgency';
             } else if (results.savings > 5000) {
-                ctaMessage.textContent = `You could save ${formatCurrency(results.savings)}/month with ${results.tier}`;
+                ctaMessage.textContent = t.ctaSave.replace('{amount}', formatCurrency(results.savings)).replace('{tier}', results.tier);
                 ctaMessage.className = 'cta-message medium-urgency';
                 ctaButton.className = 'cta-button medium-urgency';
             } else {
-                ctaMessage.textContent = `Start saving with ${results.tier}`;
+                ctaMessage.textContent = t.ctaStart.replace('{tier}', results.tier);
                 ctaMessage.className = 'cta-message';
                 ctaButton.className = 'cta-button low-urgency';
             }
@@ -520,30 +650,33 @@
             // Update testimonial based on tier
             const testimonial = document.getElementById('testimonial');
             if (results.tier === 'Jawbreaker Partnership') {
-                testimonial.querySelector('p').textContent = '"SolutionsZB transformed our entire operation with 15+ automations."';
-                testimonial.querySelector('.author').textContent = '— Jawbreaker Partnership Client';
+                testimonial.querySelector('p').textContent = t.testimonialJawbreaker;
+                testimonial.querySelector('.author').textContent = t.testimonialAuthorJawbreaker;
             } else if (results.tier === 'Bubblegum Foundation') {
-                testimonial.querySelector('p').textContent = '"SolutionsZB handles 8 workflows, we focus on growth."';
-                testimonial.querySelector('.author').textContent = '— Bubblegum Foundation Client';
+                testimonial.querySelector('p').textContent = t.testimonialDefault;
+                testimonial.querySelector('.author').textContent = t.testimonialAuthorDefault;
             } else {
-                testimonial.querySelector('p').textContent = '"Perfect way to test automation before scaling up."';
-                testimonial.querySelector('.author').textContent = '— Lollipop Taste Test Client';
+                testimonial.querySelector('p').textContent = t.testimonialLollipop;
+                testimonial.querySelector('.author').textContent = t.testimonialAuthorLollipop;
             }
         }
 
         // Event listeners
         document.getElementById('employees').addEventListener('input', function(e) {
-            document.getElementById('employeesDisplay').textContent = e.target.value + ' employees';
+            const t = translations[currentLang];
+            document.getElementById('employeesDisplay').textContent = `${e.target.value} ${t.employeesUnit}`;
             updateDisplay();
         });
 
         document.getElementById('hours').addEventListener('input', function(e) {
-            document.getElementById('hoursDisplay').textContent = e.target.value + ' hours/month';
+            const t = translations[currentLang];
+            document.getElementById('hoursDisplay').textContent = `${e.target.value} ${t.hoursUnit}`;
             updateDisplay();
         });
 
         document.getElementById('automations').addEventListener('input', function(e) {
-            document.getElementById('automationsDisplay').textContent = e.target.value + ' automations';
+            const t = translations[currentLang];
+            document.getElementById('automationsDisplay').textContent = `${e.target.value} ${t.automationsUnit}`;
             updateDisplay();
         });
 
@@ -551,6 +684,14 @@
 
         // Initialize
         updateDisplay();
+
+        // Check for saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && (savedLang === 'en' || savedLang === 'fr')) {
+                updateCalculatorLanguage(savedLang);
+            }
+        });
     </script>
 </body>
 </html>

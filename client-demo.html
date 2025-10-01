@@ -456,6 +456,139 @@
 
     <script src="script.js"></script>
     <script>
+        // Translation data
+        const translations = {
+            en: {
+                title: "ROI Calculator - SolutionsZB",
+                header: "🍬 ROI Calculator",
+                subheader: "Discover Your Automation Savings Potential",
+                sectionTitle: "Your Current Situation",
+                employeesLabel: "Employees doing repetitive tasks",
+                employeesUnit: "employees",
+                hourlyRateLabel: "Average hourly rate (CAD)",
+                hourlyRateHelp: "Include benefits & overhead",
+                hoursLabel: "Hours per month on repetitive tasks",
+                hoursUnit: "hours/month",
+                automationsLabel: "Estimated automations needed",
+                automationsUnit: "automations",
+                complexityLabel: "Process complexity",
+                complexitySimple: "Simple (basic data movement)",
+                complexityModerate: "Moderate (multi-step workflows)",
+                complexityComplex: "Complex (logic & integrations)",
+                complexityEnterprise: "Enterprise (full orchestration)",
+                errorCostsLabel: "Monthly cost of errors/rework (optional)",
+                currentCostsTitle: "Your Current Costs",
+                laborCost: "Monthly labor cost:",
+                annualWaste: "Annual waste:",
+                errorCost: "Error costs:",
+                recommendedTitle: "Recommended: {tier}",
+                monthlyInvestment: "Monthly Investment:",
+                immediateSavings: "Immediate Monthly Savings:",
+                annualBenefit: "Annual Net Benefit:",
+                navCalculator: "Calculator"
+            },
+            fr: {
+                title: "Calculateur de ROI - SolutionsZB",
+                header: "🍬 Calculateur de ROI",
+                subheader: "Découvrez votre potentiel d'économies d'automatisation",
+                sectionTitle: "Votre situation actuelle",
+                employeesLabel: "Employés effectuant des tâches répétitives",
+                employeesUnit: "employés",
+                hourlyRateLabel: "Taux horaire moyen (CAD)",
+                hourlyRateHelp: "Incluez les avantages et les frais généraux",
+                hoursLabel: "Heures par mois sur des tâches répétitives",
+                hoursUnit: "heures/mois",
+                automationsLabel: "Automatisations nécessaires estimées",
+                automationsUnit: "automatisations",
+                complexityLabel: "Complexité des processus",
+                complexitySimple: "Simple (mouvement de données de base)",
+                complexityModerate: "Modéré (flux de travail multi-étapes)",
+                complexityComplex: "Complexe (logique et intégrations)",
+                complexityEnterprise: "Entreprise (orchestration complète)",
+                errorCostsLabel: "Coût mensuel des erreurs/retravail (optionnel)",
+                currentCostsTitle: "Vos coûts actuels",
+                laborCost: "Coût de main-d'œuvre mensuel:",
+                annualWaste: "Gaspillage annuel:",
+                errorCost: "Coûts d'erreur:",
+                recommendedTitle: "Recommandé: {tier}",
+                monthlyInvestment: "Investissement mensuel:",
+                immediateSavings: "Économies mensuelles immédiates:",
+                annualBenefit: "Bénéfice net annuel:",
+                navCalculator: "Calculateur"
+            }
+        };
+
+        let currentLang = 'en';
+
+        function updateCalculatorLanguage(lang) {
+            currentLang = lang;
+            const t = translations[lang];
+
+            // Update page title
+            document.title = t.title;
+
+            // Update header
+            document.querySelector('.calc-header h1').textContent = t.header;
+            document.querySelector('.calc-header p').textContent = t.subheader;
+
+            // Update section title
+            document.querySelector('.section-title').textContent = t.sectionTitle;
+
+            // Update input labels
+            document.querySelector('label[for="employees"]').textContent = t.employeesLabel;
+            document.querySelector('label[for="hourlyRate"]').textContent = t.hourlyRateLabel;
+            document.querySelector('label[for="hourlyRate"]').nextElementSibling.textContent = t.hourlyRateHelp;
+            document.querySelector('label[for="hoursPerEmployee"]').textContent = t.hoursLabel;
+            document.querySelector('label[for="automationCount"]').textContent = t.automationsLabel;
+            document.querySelector('label[for="complexity"]').textContent = t.complexityLabel;
+            document.querySelector('label[for="errorCosts"]').textContent = t.errorCostsLabel;
+
+            // Update complexity options
+            const complexitySelect = document.getElementById('complexity');
+            complexitySelect.options[0].textContent = t.complexitySimple;
+            complexitySelect.options[1].textContent = t.complexityModerate;
+            complexitySelect.options[2].textContent = t.complexityComplex;
+            complexitySelect.options[3].textContent = t.complexityEnterprise;
+
+            // Update current costs section
+            document.querySelector('.current-state h4').textContent = t.currentCostsTitle;
+            document.querySelectorAll('.current-state .metric .label')[0].textContent = t.laborCost;
+            document.querySelectorAll('.current-state .metric .label')[1].textContent = t.annualWaste;
+            document.querySelectorAll('.current-state .metric .label')[2].textContent = t.errorCost;
+
+            // Update recommendation section labels
+            const investmentDetails = document.querySelectorAll('.investment-details p');
+            investmentDetails[0].textContent = t.monthlyInvestment;
+            investmentDetails[2].textContent = t.immediateSavings;
+            investmentDetails[4].textContent = t.annualBenefit;
+
+            // Update navigation
+            if (document.querySelector('.nav-calculator')) {
+                document.querySelector('.nav-calculator').textContent = t.navCalculator;
+            }
+
+            // Update displays with current values
+            const employees = document.getElementById('employees').value;
+            const hours = document.getElementById('hoursPerEmployee').value;
+            const automations = document.getElementById('automationCount').value;
+
+            document.getElementById('employeesDisplay').textContent = `${employees} ${t.employeesUnit}`;
+            document.getElementById('hoursDisplay').textContent = `${hours} ${t.hoursUnit}`;
+            document.getElementById('automationsDisplay').textContent = `${automations} ${t.automationsUnit}`;
+
+            // Refresh the display
+            updateDisplay();
+        }
+
+        // Override the switchLang function for this page
+        const originalSwitchLang = window.switchLang;
+        window.switchLang = function(lang) {
+            if (originalSwitchLang) {
+                originalSwitchLang(lang);
+            }
+            updateCalculatorLanguage(lang);
+        };
+
         function calculateROI() {
             const employees = parseInt(document.getElementById('employees').value);
             const hourlyRate = parseFloat(document.getElementById('hourlyRate').value);
@@ -516,12 +649,13 @@
 
         function updateDisplay() {
             const results = calculateROI();
+            const t = translations[currentLang];
 
             document.getElementById('laborCost').textContent = formatCurrency(results.laborCost);
             document.getElementById('annualWaste').textContent = formatCurrency(results.currentCost * 12);
-            document.getElementById('errorCostDisplay').textContent = formatCurrency(parseFloat(document.getElementById('errorCosts').value) || 0) + '/month';
+            document.getElementById('errorCostDisplay').textContent = formatCurrency(parseFloat(document.getElementById('errorCosts').value) || 0) + (currentLang === 'fr' ? '/mois' : '/month');
 
-            document.getElementById('tierName').textContent = 'Recommended: ' + results.tier;
+            document.getElementById('tierName').textContent = t.recommendedTitle.replace('{tier}', results.tier);
             document.getElementById('investment').textContent = formatCurrency(results.investment);
             document.getElementById('savings').textContent = formatCurrency(results.savings);
             document.getElementById('annualBenefit').textContent = formatCurrency(results.annualSavings);
@@ -532,17 +666,20 @@
         }
 
         document.getElementById('employees').addEventListener('input', function(e) {
-            document.getElementById('employeesDisplay').textContent = e.target.value + ' employees';
+            const t = translations[currentLang];
+            document.getElementById('employeesDisplay').textContent = `${e.target.value} ${t.employeesUnit}`;
             updateDisplay();
         });
 
         document.getElementById('hoursPerEmployee').addEventListener('input', function(e) {
-            document.getElementById('hoursDisplay').textContent = e.target.value + ' hours/month';
+            const t = translations[currentLang];
+            document.getElementById('hoursDisplay').textContent = `${e.target.value} ${t.hoursUnit}`;
             updateDisplay();
         });
 
         document.getElementById('automationCount').addEventListener('input', function(e) {
-            document.getElementById('automationsDisplay').textContent = e.target.value + ' automations';
+            const t = translations[currentLang];
+            document.getElementById('automationsDisplay').textContent = `${e.target.value} ${t.automationsUnit}`;
             updateDisplay();
         });
 
@@ -551,6 +688,14 @@
         document.getElementById('errorCosts').addEventListener('input', updateDisplay);
 
         updateDisplay();
+
+        // Check for saved language preference
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang && (savedLang === 'en' || savedLang === 'fr')) {
+                updateCalculatorLanguage(savedLang);
+            }
+        });
     </script>
 </body>
 </html>
