@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button';
 
 interface TiersSlideProps {
-  onSelectTier: (tier: number) => void;
+  onSelectTier?: (tier: number) => void;
 }
 
 export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
@@ -56,15 +56,14 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
           {tiers.map((tier, index) => (
             <div
               key={index}
-              className={`glass rounded-2xl p-8 space-y-6 hover:scale-105 transition-all duration-300 shadow-xl cursor-pointer ${tier.position}`}
-              onClick={() => onSelectTier(index)}
+              className={`glass rounded-2xl p-8 flex flex-col hover:scale-105 transition-all duration-300 shadow-xl ${tier.position}`}
             >
               <div className="space-y-3">
                 <h3 className="text-2xl font-bold text-primary">{tier.name}</h3>
                 <p className="text-sm italic text-muted-foreground">{tier.tagline}</p>
               </div>
 
-              <ul className="space-y-3">
+              <ul className="space-y-3 flex-grow mt-6">
                 {tier.features.map((feature, i) => (
                   <li key={i} className="text-sm leading-relaxed flex items-start gap-2">
                     <span className="text-primary mt-1">•</span>
@@ -73,9 +72,11 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
                 ))}
               </ul>
 
-              <Button className="w-full" size="lg">
-                Learn More
-              </Button>
+              <div className="mt-6">
+                <Button className="w-full" size="lg">
+                  Learn More
+                </Button>
+              </div>
             </div>
           ))}
         </div>

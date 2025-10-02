@@ -1,13 +1,10 @@
 import { Button } from '@/components/ui/button';
-import { ArrowLeft } from 'lucide-react';
 
 interface TierDetailSlideProps {
   selectedTier: number;
-  onBack: () => void;
-  onSelectPlan: () => void;
 }
 
-export const TierDetailSlide = ({ selectedTier, onBack, onSelectPlan }: TierDetailSlideProps) => {
+export const TierDetailSlide = ({ selectedTier }: TierDetailSlideProps) => {
   const tiers = [
     {
       name: 'LOLLIPOP TIER',
@@ -44,7 +41,7 @@ export const TierDetailSlide = ({ selectedTier, onBack, onSelectPlan }: TierDeta
     {
       name: 'SUMMER FLING - À LA CARTE',
       tagline: 'We build out your automation needs fully, provide documentation, and 90-day weekly support',
-      price: 'Project-Based',
+      price: 'Starting at $10,000 for project-based buildout',
       details: [
         '90 days of weekly support included',
         'Full day team training session',
@@ -64,14 +61,6 @@ export const TierDetailSlide = ({ selectedTier, onBack, onSelectPlan }: TierDeta
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
       <div className="max-w-4xl w-full space-y-8">
-        {/* Back hint */}
-        <div className="text-center fade-in">
-          <div className="inline-flex items-center gap-2 glass rounded-full px-6 py-3 text-sm">
-            <span>🤔</span>
-            <span>Changed your mind? Go back to compare all options!</span>
-          </div>
-        </div>
-
         {/* Tier card */}
         <div className="glass rounded-3xl p-12 space-y-8 shadow-2xl">
           <div className="space-y-4 text-center">
@@ -90,25 +79,6 @@ export const TierDetailSlide = ({ selectedTier, onBack, onSelectPlan }: TierDeta
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className="flex gap-4 pt-6">
-            <Button
-              onClick={onBack}
-              variant="outline"
-              size="lg"
-              className="flex-1"
-            >
-              <ArrowLeft className="mr-2 h-5 w-5" />
-              Compare Plans
-            </Button>
-            <Button
-              onClick={onSelectPlan}
-              size="lg"
-              className="flex-1 bg-primary hover:bg-primary/90"
-            >
-              Select This Plan
-            </Button>
           </div>
         </div>
       </div>

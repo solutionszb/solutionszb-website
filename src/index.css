@@ -8,17 +8,17 @@
 
 @layer base {
   :root {
-    /* Light Mode - Exact Colors from Spec */
-    --text: 345 30% 8%;
-    --background: 0 20% 99%;
-    --primary: 347 57% 51%;
-    --secondary: 347 70% 71%;
-    --accent: 347 69% 52%;
-    
-    --foreground: 345 30% 8%;
-    --card: 0 20% 99%;
+    /* Light Mode - Original Color Palette */
+    --text: 345 30% 8%;           /* #160e10 */
+    --background: 0 0% 99%;       /* #fdfcfc */
+    --primary: 347 59% 51%;       /* #c63f60 */
+    --secondary: 347 72% 72%;     /* #ea819b */
+    --accent: 347 68% 52%;        /* #d8315b */
+
+    --foreground: 345 30% 8%;     /* #160e10 */
+    --card: 0 0% 99%;             /* #fdfcfc */
     --card-foreground: 345 30% 8%;
-    --popover: 0 20% 99%;
+    --popover: 0 0% 99%;
     --popover-foreground: 345 30% 8%;
     --primary-foreground: 0 0% 100%;
     --secondary-foreground: 345 30% 8%;
@@ -29,23 +29,23 @@
     --destructive-foreground: 0 0% 100%;
     --border: 345 10% 90%;
     --input: 345 10% 90%;
-    --ring: 347 57% 51%;
+    --ring: 347 59% 51%;
     --radius: 1rem;
 
     /* Glass morphism */
-    --glass-bg: 0 20% 99% / 0.7;
+    --glass-bg: 0 0% 99% / 0.7;
     --glass-border: 345 10% 90% / 0.3;
   }
 
   .dark {
-    /* Dark Mode - Exact Colors from Spec */
-    --text: 345 23% 92%;
-    --background: 0 20% 1%;
-    --primary: 347 55% 49%;
-    --secondary: 347 69% 29%;
-    --accent: 347 69% 48%;
-    
-    --foreground: 345 23% 92%;
+    /* Dark Mode - Original Color Palette */
+    --text: 345 23% 92%;          /* #f1e9eb */
+    --background: 0 0% 1%;        /* #030202 */
+    --primary: 347 56% 49%;       /* #c0395b */
+    --secondary: 347 69% 29%;     /* #7e1530 */
+    --accent: 347 68% 48%;        /* #ce2751 */
+
+    --foreground: 345 23% 92%;    /* #f1e9eb */
     --card: 0 0% 5%;
     --card-foreground: 345 23% 92%;
     --popover: 0 0% 5%;
@@ -59,7 +59,7 @@
     --destructive-foreground: 345 23% 92%;
     --border: 345 10% 15%;
     --input: 345 10% 15%;
-    --ring: 347 55% 49%;
+    --ring: 347 56% 49%;
 
     /* Glass morphism - dark mode */
     --glass-bg: 0 0% 5% / 0.7;
@@ -91,34 +91,9 @@
   }
 
   /* Smooth slide transitions */
-  .slide-enter {
-    animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .slide-exit {
-    animation: slideOut 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
-
-  @keyframes slideOut {
-    from {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    to {
-      opacity: 0;
-      transform: translateX(-100%);
-    }
+  .slide-transition {
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   /* Floating animation for robot */

@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from 'react';
 
-export const useSlideNavigation = (totalSlides: number) => {
+export const useSlideNavigation = (totalSlides: number, canNavigateForward: () => boolean = () => true) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
 
@@ -12,11 +12,11 @@ export const useSlideNavigation = (totalSlides: number) => {
   }, [currentSlide, totalSlides]);
 
   const nextSlide = useCallback(() => {
-    if (currentSlide < totalSlides - 1) {
+    if (currentSlide < totalSlides - 1 && canNavigateForward()) {
       setDirection('forward');
       setCurrentSlide(prev => prev + 1);
     }
-  }, [currentSlide, totalSlides]);
+  }, [currentSlide, totalSlides, canNavigateForward]);
 
   const prevSlide = useCallback(() => {
     if (currentSlide > 0) {
@@ -29,11 +29,13 @@ export const useSlideNavigation = (totalSlides: number) => {
     const handleKeyDown = (e: KeyboardEvent) => {
       switch (e.key) {
         case 'ArrowRight':
+        case 'ArrowDown':
         case ' ':
           e.preventDefault();
           nextSlide();
           break;
         case 'ArrowLeft':
+        case 'ArrowUp':
           e.preventDefault();
           prevSlide();
           break;
@@ -53,7 +55,7 @@ export const useSlideNavigation = (totalSlides: number) => {
       
       setTimeout(() => {
         isScrolling = false;
-      }, 800);
+      }, 700);
     };
 
     window.addEventListener('keydown', handleKeyDown);

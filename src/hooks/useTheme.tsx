@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const useTheme = () => {
-  const [theme, setTheme] = useState<'light' | 'dark'>('dark');
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     const root = window.document.documentElement;
