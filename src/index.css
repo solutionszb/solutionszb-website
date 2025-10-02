@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Slide Deck Theme - Custom Design System */
+
+@layer base {
+  :root {
+    /* Light Mode - Exact Colors from Spec */
+    --text: 345 30% 8%;
+    --background: 0 20% 99%;
+    --primary: 347 57% 51%;
+    --secondary: 347 70% 71%;
+    --accent: 347 69% 52%;
+    
+    --foreground: 345 30% 8%;
+    --card: 0 20% 99%;
+    --card-foreground: 345 30% 8%;
+    --popover: 0 20% 99%;
+    --popover-foreground: 345 30% 8%;
+    --primary-foreground: 0 0% 100%;
+    --secondary-foreground: 345 30% 8%;
+    --muted: 345 10% 95%;
+    --muted-foreground: 345 15% 45%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 345 10% 90%;
+    --input: 345 10% 90%;
+    --ring: 347 57% 51%;
+    --radius: 1rem;
+
+    /* Glass morphism */
+    --glass-bg: 0 20% 99% / 0.7;
+    --glass-border: 345 10% 90% / 0.3;
+  }
+
+  .dark {
+    /* Dark Mode - Exact Colors from Spec */
+    --text: 345 23% 92%;
+    --background: 0 20% 1%;
+    --primary: 347 55% 49%;
+    --secondary: 347 69% 29%;
+    --accent: 347 69% 48%;
+    
+    --foreground: 345 23% 92%;
+    --card: 0 0% 5%;
+    --card-foreground: 345 23% 92%;
+    --popover: 0 0% 5%;
+    --popover-foreground: 345 23% 92%;
+    --primary-foreground: 0 0% 100%;
+    --secondary-foreground: 345 23% 92%;
+    --muted: 345 10% 15%;
+    --muted-foreground: 345 15% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 345 23% 92%;
+    --border: 345 10% 15%;
+    --input: 345 10% 15%;
+    --ring: 347 55% 49%;
+
+    /* Glass morphism - dark mode */
+    --glass-bg: 0 0% 5% / 0.7;
+    --glass-border: 345 10% 20% / 0.3;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  /* Glass morphism effect */
+  .glass {
+    background: hsl(var(--glass-bg));
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--glass-border));
+  }
+
+  /* Smooth slide transitions */
+  .slide-enter {
+    animation: slideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .slide-exit {
+    animation: slideOut 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideOut {
+    from {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    to {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+  }
+
+  /* Floating animation for robot */
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  /* Fade in animation */
+  .fade-in {
+    animation: fadeIn 0.5s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
