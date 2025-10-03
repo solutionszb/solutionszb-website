@@ -30,7 +30,6 @@ export const useSlideNavigation = (totalSlides: number, canNavigateForward: () =
       switch (e.key) {
         case 'ArrowRight':
         case 'ArrowDown':
-        case ' ':
           e.preventDefault();
           nextSlide();
           break;
@@ -43,23 +42,32 @@ export const useSlideNavigation = (totalSlides: number, canNavigateForward: () =
     };
 
     let isScrolling = false;
+    let scrollTimeout: NodeJS.Timeout | null = null;
     const handleWheel = (e: WheelEvent) => {
+      e.preventDefault();
+
       if (isScrolling) return;
-      
-      isScrolling = true;
-      if (e.deltaY > 0) {
-        nextSlide();
-      } else if (e.deltaY < 0) {
-        prevSlide();
+
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
       }
-      
-      setTimeout(() => {
-        isScrolling = false;
-      }, 700);
+
+      scrollTimeout = setTimeout(() => {
+        isScrolling = true;
+        if (e.deltaY > 0) {
+          nextSlide();
+        } else if (e.deltaY < 0) {
+          prevSlide();
+        }
+
+        setTimeout(() => {
+          isScrolling = false;
+        }, 1000);
+      }, 50);
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    window.addEventListener('wheel', handleWheel, { passive: true });
+    window.addEventListener('wheel', handleWheel, { passive: false });
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);

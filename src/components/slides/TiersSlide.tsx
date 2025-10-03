@@ -1,13 +1,15 @@
 import { Button } from '@/components/ui/button';
 import { t } from '@/lib/translations';
+import { NavigationArrows } from '../NavigationArrows';
 
 interface TiersSlideProps {
   onSelectTier?: (tier: number) => void;
+  onNext?: () => void;
+  onPrev?: () => void;
 }
 
-export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
+export const TiersSlide = ({ onSelectTier, onNext, onPrev }: TiersSlideProps) => {
   const translations = t();
-
   const tiers = [
     {
       name: translations.tiers.cards[0].name,
@@ -33,7 +35,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16 relative">
       <div className="max-w-7xl w-full space-y-12">
         <h2 className="text-5xl md:text-6xl font-bold text-center">
           {translations.tiers.title}
@@ -60,7 +62,11 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
               </ul>
 
               <div className="mt-6">
-                <Button className="w-full" size="lg">
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => onSelectTier?.(index)}
+                >
                   {tier.buttonText}
                 </Button>
               </div>
@@ -68,6 +74,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
           ))}
         </div>
       </div>
+      <NavigationArrows showUp={true} showDown={true} onUpClick={onPrev} onDownClick={onNext} />
     </div>
   );
 };
