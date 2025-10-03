@@ -6,13 +6,36 @@ import { useState } from 'react';
 export const HeroSlide = () => {
   const translations = t();
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // TODO: Add email signup logic
-    console.log('Email submitted:', email);
-    alert('Thank you for joining the waitlist!');
-    setEmail('');
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch(
+        'https://api.gumloop.com/api/v1/start_pipeline?api_key=4c6fce60e40645ba8c700a69c0bf7ca4&user_id=uj7Pg0b6YLOBiLqL0iBbPzNPvKI3&saved_item_id=jLGnNgNZwCodtdnrN4WfEX',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email }),
+        }
+      );
+
+      if (response.ok) {
+        alert('Thank you for joining the waitlist!');
+        setEmail('');
+      } else {
+        alert('Something went wrong. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error submitting email:', error);
+      alert('Failed to join waitlist. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -46,8 +69,8 @@ export const HeroSlide = () => {
               required
               className="flex-1"
             />
-            <Button type="submit" size="lg">
-              Join
+            <Button type="submit" size="lg" disabled={isSubmitting}>
+              {isSubmitting ? 'Joining...' : 'Join'}
             </Button>
           </form>
         </div>
