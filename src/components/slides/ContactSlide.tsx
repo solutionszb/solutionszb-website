@@ -1,6 +1,10 @@
 import { NavigationArrows } from '../NavigationArrows';
 
-export const ContactSlide = () => {
+interface ContactSlideProps {
+  onPrev?: () => void;
+}
+
+export const ContactSlide = ({ onPrev }: ContactSlideProps) => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16 relative">
       <div className="max-w-4xl w-full space-y-8">
@@ -23,7 +27,7 @@ export const ContactSlide = () => {
           />
         </div>
       </div>
-      <NavigationArrows showUp={true} showDown={false} />
+      <NavigationArrows showUp={true} showDown={false} onUpClick={onPrev} />
     </div>
   );
 };

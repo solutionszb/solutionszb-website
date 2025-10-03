@@ -1,7 +1,12 @@
 import { Wrench, Zap, TrendingUp } from 'lucide-react';
 import { NavigationArrows } from '../NavigationArrows';
 
-export const SolutionsSlide = () => {
+interface SolutionsSlideProps {
+  onNext?: () => void;
+  onPrev?: () => void;
+}
+
+export const SolutionsSlide = ({ onNext, onPrev }: SolutionsSlideProps) => {
   const features = [
     {
       icon: Wrench,
@@ -49,7 +54,7 @@ export const SolutionsSlide = () => {
           ))}
         </div>
       </div>
-      <NavigationArrows showUp={true} showDown={true} />
+      <NavigationArrows showUp={true} showDown={true} onUpClick={onPrev} onDownClick={onNext} />
     </div>
   );
 };

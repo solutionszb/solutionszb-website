@@ -3,9 +3,11 @@ import { NavigationArrows } from '../NavigationArrows';
 
 interface TiersSlideProps {
   onSelectTier?: (tier: number) => void;
+  onNext?: () => void;
+  onPrev?: () => void;
 }
 
-export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
+export const TiersSlide = ({ onSelectTier, onNext, onPrev }: TiersSlideProps) => {
   const tiers = [
     {
       name: 'LOLLIPOP TIER',
@@ -86,7 +88,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
           ))}
         </div>
       </div>
-      <NavigationArrows showUp={true} showDown={true} />
+      <NavigationArrows showUp={true} showDown={true} onUpClick={onPrev} onDownClick={onNext} />
     </div>
   );
 };

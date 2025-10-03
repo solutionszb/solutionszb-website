@@ -30,7 +30,6 @@ export const useSlideNavigation = (totalSlides: number, canNavigateForward: () =
       switch (e.key) {
         case 'ArrowRight':
         case 'ArrowDown':
-        case ' ':
           e.preventDefault();
           nextSlide();
           break;
