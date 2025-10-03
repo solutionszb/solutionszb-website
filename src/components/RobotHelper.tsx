@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { t } from '@/lib/translations';
 
 interface RobotHelperProps {
   show: boolean;
@@ -7,6 +8,7 @@ interface RobotHelperProps {
 
 export const RobotHelper = ({ show, currentSlide }: RobotHelperProps) => {
   const [visible, setVisible] = useState(false);
+  const translations = t();
 
   useEffect(() => {
     if (show) {
@@ -24,8 +26,8 @@ export const RobotHelper = ({ show, currentSlide }: RobotHelperProps) => {
   const getMessage = () => {
     return (
       <p className="text-sm font-medium">
-        Press <kbd className="px-2 py-1 bg-muted rounded text-xs">SPACE</kbd> or use{' '}
-        <kbd className="px-2 py-1 bg-muted rounded text-xs">ARROW KEYS</kbd> to navigate
+        Press <kbd className="px-2 py-1 bg-muted rounded text-xs">{translations.robot.spaceKey}</kbd> or use{' '}
+        <kbd className="px-2 py-1 bg-muted rounded text-xs">{translations.robot.arrowKeys}</kbd> to navigate
       </p>
     );
   };

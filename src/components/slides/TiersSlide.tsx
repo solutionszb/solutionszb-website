@@ -1,46 +1,33 @@
 import { Button } from '@/components/ui/button';
+import { t } from '@/lib/translations';
 
 interface TiersSlideProps {
   onSelectTier?: (tier: number) => void;
 }
 
 export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
+  const translations = t();
+
   const tiers = [
     {
-      name: 'LOLLIPOP TIER',
-      tagline: 'Taste test for low commitment high reward',
-      features: [
-        '3 month contract',
-        'Weekly maintenance',
-        'Basic integrations with conditional routing',
-        'Secure Vault for Connection Credentials',
-        'Starting at $500 monthly for 1-2 automations utilizing AI steps and data connection to your internal database'
-      ],
+      name: translations.tiers.cards[0].name,
+      tagline: translations.tiers.cards[0].tagline,
+      features: translations.tiers.cards[0].features,
+      buttonText: translations.tiers.cards[0].buttonText,
       position: 'md:translate-y-8'
     },
     {
-      name: 'BUBBLE GUM BLAST',
-      tagline: 'You just keep on chewing and wanting more solutions',
-      features: [
-        'Everything in Lollipop tier',
-        '6-12+ month starting contract',
-        'On-going workflow maintenance',
-        'Full cloud integration and new custom tailored solutions that fits your architecture',
-        'I cover the processing fees and costs (slight price increase if run volume exceeds client approximates by 50%)',
-        'Secure Vault for Connection Credentials'
-      ],
+      name: translations.tiers.cards[1].name,
+      tagline: translations.tiers.cards[1].tagline,
+      features: translations.tiers.cards[1].features,
+      buttonText: translations.tiers.cards[1].buttonText,
       position: 'md:-translate-y-8'
     },
     {
-      name: 'SUMMER FLING - À LA CARTE',
-      tagline: 'We build out your automation needs fully, provide documentation, and 90-day weekly support',
-      features: [
-        '90 days support',
-        '1 day team training',
-        'Increased training at a cost',
-        'Documentation package',
-        'You house the software processing fees and maintenance costs'
-      ],
+      name: translations.tiers.cards[2].name,
+      tagline: translations.tiers.cards[2].tagline,
+      features: translations.tiers.cards[2].features,
+      buttonText: translations.tiers.cards[2].buttonText,
       position: 'md:translate-y-8'
     }
   ];
@@ -49,7 +36,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
     <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
       <div className="max-w-7xl w-full space-y-12">
         <h2 className="text-5xl md:text-6xl font-bold text-center">
-          Choose Your Path
+          {translations.tiers.title}
         </h2>
 
         <div className="grid md:grid-cols-3 gap-8 mt-16">
@@ -74,7 +61,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
 
               <div className="mt-6">
                 <Button className="w-full" size="lg">
-                  Learn More
+                  {tier.buttonText}
                 </Button>
               </div>
             </div>

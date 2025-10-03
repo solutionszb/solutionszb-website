@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "title": "AI Automation at the Speed of Enthusiasm | Gumloop Solutions",
+    "description": "Transform your manufacturing operations with AI-native automation. Expert Gumloop consultant delivering 200%+ revenue increases through advanced workflow automation.",
+    "author": "Gumloop Automation Specialist",
+    "ogTitle": "AI Automation at the Speed of Enthusiasm",
+    "ogDescription": "Gumloop-powered automation solutions for manufacturers. AI-native workflows that Zapier can't handle.",
+    "twitterTitle": "AI Automation at the Speed of Enthusiasm",
+    "twitterDescription": "Expert Gumloop automation for manufacturing excellence"
+  },
+  "hero": {
+    "title": "AI Automation at the",
+    "titleHighlight": "Speed of Enthusiasm",
+    "subtitle": "Where AI Meets Energy",
+    "description": "I'm a 26-year-old automation specialist who helps manufacturers streamline their operations using Gumloop - the most advanced automation platform most consultants haven't even heard of yet. My clients love working with someone who gets genuinely excited about solving their problems."
+  },
+  "solutions": {
+    "title": "Gumloop-Powered Solutions",
+    "subtitle": "AI-native automation, not AI-added automation. Built for manufacturing excellence.",
+    "features": [
+      {
+        "title": "Gumloop Expertise",
+        "description": "Master of complex workflows that Zapier can't handle. If Zapier is a calculator, Gumloop is Wolfram Alpha."
+      },
+      {
+        "title": "24/7 Automation",
+        "description": "Your automation infrastructure works reliably while we continuously identify and implement new opportunities."
+      },
+      {
+        "title": "Real Results",
+        "description": "200%+ revenue increases at client companies. We deliver $50K value for every $10K invested."
+      }
+    ]
+  },
+  "tiers": {
+    "title": "Choose Your Path",
+    "cards": [
+      {
+        "name": "LOLLIPOP TIER",
+        "tagline": "Taste test for low commitment high reward",
+        "features": [
+          "3 month contract",
+          "Weekly maintenance",
+          "Basic integrations with conditional routing",
+          "Secure Vault for Connection Credentials",
+          "Starting at $500 monthly for 1-2 automations utilizing AI steps and data connection to your internal database"
+        ],
+        "buttonText": "Learn More"
+      },
+      {
+        "name": "BUBBLE GUM BLAST",
+        "tagline": "You just keep on chewing and wanting more solutions",
+        "features": [
+          "Everything in Lollipop tier",
+          "6-12+ month starting contract",
+          "On-going workflow maintenance",
+          "Full cloud integration and new custom tailored solutions that fits your architecture",
+          "I cover the processing fees and costs (slight price increase if run volume exceeds client approximates by 50%)",
+          "Secure Vault for Connection Credentials"
+        ],
+        "buttonText": "Learn More"
+      },
+      {
+        "name": "SUMMER FLING - À LA CARTE",
+        "tagline": "We build out your automation needs fully, provide documentation, and 90-day weekly support",
+        "features": [
+          "90 days support",
+          "1 day team training",
+          "Increased training at a cost",
+          "Documentation package",
+          "You house the software processing fees and maintenance costs"
+        ],
+        "buttonText": "Learn More"
+      }
+    ]
+  },
+  "tierDetails": {
+    "includesHeading": "What's Included:",
+    "cards": [
+      {
+        "name": "LOLLIPOP TIER",
+        "tagline": "Taste test for low commitment high reward",
+        "price": "Starting at $500/month",
+        "details": [
+          "3 month minimum contract commitment",
+          "Weekly maintenance and monitoring",
+          "Basic integrations with conditional routing logic",
+          "Secure credential management vault",
+          "Includes 1-2 automations with AI capabilities",
+          "Direct connection to your internal database",
+          "Email support with 48-hour response time",
+          "Perfect for testing automation benefits"
+        ]
+      },
+      {
+        "name": "BUBBLE GUM BLAST",
+        "tagline": "You just keep on chewing and wanting more solutions",
+        "price": "Custom Pricing",
+        "details": [
+          "Everything included in Lollipop tier",
+          "6-12+ month partnership contract",
+          "Continuous workflow optimization",
+          "Full cloud infrastructure integration",
+          "Custom-tailored solutions for your architecture",
+          "Processing fees covered (up to 50% over estimate)",
+          "Priority support with 24-hour response time",
+          "Quarterly strategy sessions",
+          "Unlimited automation workflows",
+          "Advanced AI implementation"
+        ]
+      },
+      {
+        "name": "SUMMER FLING - À LA CARTE",
+        "tagline": "We build out your automation needs fully, provide documentation, and 90-day weekly support",
+        "price": "Starting at $10,000 for project-based buildout",
+        "details": [
+          "90 days of weekly support included",
+          "Full day team training session",
+          "Additional training available at cost",
+          "Complete documentation package",
+          "Knowledge transfer sessions",
+          "You manage processing fees and maintenance",
+          "Perfect for in-house teams",
+          "One-time implementation fee",
+          "Ideal for specific project needs"
+        ]
+      }
+    ]
+  },
+  "contact": {
+    "title": "Let's Build Something Amazing",
+    "subtitle": "We'll get back to you within 2-10 hours"
+  },
+  "robot": {
+    "navigationText": "Press {space} or use {arrows} to navigate",
+    "spaceKey": "SPACE",
+    "arrowKeys": "ARROW KEYS"
+  }
+}

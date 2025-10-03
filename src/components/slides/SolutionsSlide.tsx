@@ -1,21 +1,24 @@
 import { Wrench, Zap, TrendingUp } from 'lucide-react';
+import { t } from '@/lib/translations';
 
 export const SolutionsSlide = () => {
+  const translations = t();
+
   const features = [
     {
       icon: Wrench,
-      title: 'Gumloop Expertise',
-      description: "Master of complex workflows that Zapier can't handle. If Zapier is a calculator, Gumloop is Wolfram Alpha."
+      title: translations.solutions.features[0].title,
+      description: translations.solutions.features[0].description
     },
     {
       icon: Zap,
-      title: '24/7 Automation',
-      description: 'Your automation infrastructure works reliably while we continuously identify and implement new opportunities.'
+      title: translations.solutions.features[1].title,
+      description: translations.solutions.features[1].description
     },
     {
       icon: TrendingUp,
-      title: 'Real Results',
-      description: '200%+ revenue increases at client companies. We deliver $50K value for every $10K invested.'
+      title: translations.solutions.features[2].title,
+      description: translations.solutions.features[2].description
     }
   ];
 
@@ -24,10 +27,10 @@ export const SolutionsSlide = () => {
       <div className="max-w-6xl w-full space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-bold">
-            Gumloop-Powered Solutions
+            {translations.solutions.title}
           </h2>
           <p className="text-xl md:text-2xl text-muted-foreground">
-            AI-native automation, not AI-added automation. Built for manufacturing excellence.
+            {translations.solutions.subtitle}
           </p>
         </div>
 

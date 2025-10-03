@@ -1,13 +1,17 @@
+import { t } from '@/lib/translations';
+
 export const ContactSlide = () => {
+  const translations = t();
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
       <div className="max-w-4xl w-full space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-bold">
-            Let's Build Something Amazing
+            {translations.contact.title}
           </h2>
           <p className="text-xl text-muted-foreground">
-            We'll get back to you within 2-10 hours
+            {translations.contact.subtitle}
           </p>
         </div>
 
