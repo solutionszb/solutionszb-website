@@ -1,4 +1,5 @@
 import { Wrench, Zap, TrendingUp } from 'lucide-react';
+import { NavigationArrows } from '../NavigationArrows';
 
 export const SolutionsSlide = () => {
   const features = [
@@ -20,7 +21,7 @@ export const SolutionsSlide = () => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 relative">
       <div className="max-w-6xl w-full space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-bold">
@@ -48,6 +49,7 @@ export const SolutionsSlide = () => {
           ))}
         </div>
       </div>
+      <NavigationArrows showUp={true} showDown={true} />
     </div>
   );
 };

@@ -12,13 +12,13 @@ import { ContactSlide } from './slides/ContactSlide';
 
 export const SlideLayout = () => {
   const { theme, toggleTheme } = useTheme();
-  
-  const { currentSlide } = useSlideNavigation(7);
+
+  const { currentSlide, goToSlide } = useSlideNavigation(7);
 
   const slides = [
     <HeroSlide key="hero" />,
     <SolutionsSlide key="solutions" />,
-    <TiersSlide key="tiers" />,
+    <TiersSlide key="tiers" onSelectTier={(tier) => goToSlide(tier + 3)} />,
     <TierDetailSlide key="lollipop" selectedTier={0} />,
     <TierDetailSlide key="bubblegum" selectedTier={1} />,
     <TierDetailSlide key="summerfling" selectedTier={2} />,

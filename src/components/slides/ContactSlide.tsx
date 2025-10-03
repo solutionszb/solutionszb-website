@@ -1,6 +1,8 @@
+import { NavigationArrows } from '../NavigationArrows';
+
 export const ContactSlide = () => {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16 relative">
       <div className="max-w-4xl w-full space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-bold">
@@ -21,6 +23,7 @@ export const ContactSlide = () => {
           />
         </div>
       </div>
+      <NavigationArrows showUp={true} showDown={false} />
     </div>
   );
 };

@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { NavigationArrows } from '../NavigationArrows';
 
 interface TiersSlideProps {
   onSelectTier?: (tier: number) => void;
@@ -46,7 +47,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16 relative">
       <div className="max-w-7xl w-full space-y-12">
         <h2 className="text-5xl md:text-6xl font-bold text-center">
           Choose Your Path
@@ -73,7 +74,11 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
               </ul>
 
               <div className="mt-6">
-                <Button className="w-full" size="lg">
+                <Button
+                  className="w-full"
+                  size="lg"
+                  onClick={() => onSelectTier?.(index)}
+                >
                   Learn More
                 </Button>
               </div>
@@ -81,6 +86,7 @@ export const TiersSlide = ({ onSelectTier }: TiersSlideProps) => {
           ))}
         </div>
       </div>
+      <NavigationArrows showUp={true} showDown={true} />
     </div>
   );
 };

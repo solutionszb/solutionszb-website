@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { NavigationArrows } from '../NavigationArrows';
 
 interface TierDetailSlideProps {
   selectedTier: number;
@@ -59,7 +60,7 @@ export const TierDetailSlide = ({ selectedTier }: TierDetailSlideProps) => {
   const tier = tiers[selectedTier];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16 relative">
       <div className="max-w-4xl w-full space-y-8">
         {/* Tier card */}
         <div className="glass rounded-3xl p-12 space-y-8 shadow-2xl">
@@ -82,6 +83,7 @@ export const TierDetailSlide = ({ selectedTier }: TierDetailSlideProps) => {
           </div>
         </div>
       </div>
+      <NavigationArrows showUp={true} showDown={true} />
     </div>
   );
 };
