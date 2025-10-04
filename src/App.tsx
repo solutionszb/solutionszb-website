@@ -1,27 +1,41 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Index from "./pages/Index";
-import NotFound from "./pages/NotFound";
+import React from 'react';
+import CanvasBackground from './components/CanvasBackground';
+import CompanyCard from './components/CompanyCard';
+import AboutCard from './components/AboutCard';
 
-const queryClient = new QueryClient();
+function App() {
+  return (
+    <div className="App">
+      <CanvasBackground />
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+      <main style={styles.main}>
+        <div style={styles.container}>
+          <CompanyCard />
+          <AboutCard />
+        </div>
+      </main>
+    </div>
+  );
+}
+
+const styles: { [key: string]: React.CSSProperties } = {
+  main: {
+    minHeight: '100vh',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 'var(--space-lg)',
+    position: 'relative',
+    zIndex: 1,
+  },
+  container: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 'var(--space-xl)',
+    alignItems: 'center',
+    width: '100%',
+    maxWidth: '1200px',
+  },
+};
 
 export default App;
