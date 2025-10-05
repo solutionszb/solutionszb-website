@@ -43,8 +43,8 @@ const CanvasBackground: React.FC = () => {
     const maxConnectionDistance = 14; // Max 14 grid spaces apart
 
     // particle-line-speed: Speed range for flowing dots
-    const minSpeed = 0.3;
-    const maxSpeed = 1.2;
+    const minSpeed = 0.1;
+    const maxSpeed = 0.7;
 
     let animationOffset = 0;
 
