@@ -123,18 +123,4 @@
       opacity: 1;
     }
   }
-
-  /* Bobbing arrow animation */
-  .bob {
-    animation: bob 2s ease-in-out infinite;
-  }
-
-  @keyframes bob {
-    0%, 100% {
-      transform: translateY(0px);
-    }
-    50% {
-      transform: translateY(-15px);
-    }
-  }
 }

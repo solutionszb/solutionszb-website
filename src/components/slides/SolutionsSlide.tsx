@@ -1,14 +1,9 @@
 import { Wrench, Zap, TrendingUp } from 'lucide-react';
 import { t } from '@/lib/translations';
-import { NavigationArrows } from '../NavigationArrows';
 
-interface SolutionsSlideProps {
-  onNext?: () => void;
-  onPrev?: () => void;
-}
-
-export const SolutionsSlide = ({ onNext, onPrev }: SolutionsSlideProps) => {
+export const SolutionsSlide = () => {
   const translations = t();
+
   const features = [
     {
       icon: Wrench,
@@ -28,7 +23,7 @@ export const SolutionsSlide = ({ onNext, onPrev }: SolutionsSlideProps) => {
   ];
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8">
       <div className="max-w-6xl w-full space-y-12">
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-bold">
@@ -56,7 +51,6 @@ export const SolutionsSlide = ({ onNext, onPrev }: SolutionsSlideProps) => {
           ))}
         </div>
       </div>
-      <NavigationArrows showUp={true} showDown={true} onUpClick={onPrev} onDownClick={onNext} />
     </div>
   );
 };

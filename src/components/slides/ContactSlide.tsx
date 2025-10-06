@@ -1,14 +1,10 @@
 import { t } from '@/lib/translations';
-import { NavigationArrows } from '../NavigationArrows';
 
-interface ContactSlideProps {
-  onPrev?: () => void;
-}
-
-export const ContactSlide = ({ onPrev }: ContactSlideProps) => {
+export const ContactSlide = () => {
   const translations = t();
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16 relative">
+    <div className="flex flex-col items-center justify-center min-h-screen px-8 py-16">
       <div className="max-w-4xl w-full space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-5xl md:text-6xl font-bold">
@@ -29,7 +25,6 @@ export const ContactSlide = ({ onPrev }: ContactSlideProps) => {
           />
         </div>
       </div>
-      <NavigationArrows showUp={true} showDown={false} onUpClick={onPrev} />
     </div>
   );
 };
